@@ -7,7 +7,7 @@ const http = require("http");
  * Use cases:
  * 1. simple server response
  * 2. server response with a delay
- * 3. server response with a delay and a CPU intensive task
+ * 3. server response with a CPU intensive task
  * 4. read from DB and return response
  * 5. write to DB and return response
  */
@@ -49,7 +49,7 @@ server.listen(3000, () => {
 function heavyComputation() {
   let result = 0;
 
-  // random number between 1M - 200M
+  // random number between 1M - 20M
   const iterations = Math.floor(Math.random() * 20000000) + 1000000;
 
   for (let i = 0; i < iterations; i++) {
