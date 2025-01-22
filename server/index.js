@@ -24,7 +24,7 @@ const server = http.createServer((req, res) => {
     response.msg = "Welcome to the delayed homepage!";
 
     setTimeout(() => {
-      res.end(response.toString());
+      res.end(JSON.stringify(response));
     }, 3000);
   } else if (req.url === "/cpu-intensive") {
     const start = Date.now();
@@ -33,11 +33,11 @@ const server = http.createServer((req, res) => {
 
     response.msg = `Result of CPU intensive task is: ${result}`;
 
-    res.end(response.toString());
+    res.end(JSON.stringify(response));
   } else {
     response.msg = "Page not found";
 
-    res.end(response.toString());
+    res.end(JSON.stringify(response));
   }
 });
 
