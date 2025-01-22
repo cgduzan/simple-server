@@ -40,30 +40,6 @@ source "amazon-ebs" "server" {
 build {
   sources = ["source.amazon-ebs.server"]
 
-  # provisioner "shell" {
-  #   environment_vars = [
-  #     # "FOO=hello world",
-  #   ]
-  #   inline = [
-  #     # "echo \"FOO is $FOO\" > example.txt",
-  #     "echo Installing Node",
-  #     "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash",
-  #     "source ~/.bashrc",
-  #     "nvm install --lts",
-  #     "node -e \"console.log('Running Node.js ' + process.version)\"",
-
-  #     "echo Installing Git",
-  #     "sudo yum update -y",
-  #     "sudo yum install git -y",
-  #     "git --version",
-
-  #     "echo Installing Simple Server",
-  #     "git clone https://github.com/cgduzan/simple-server.git",
-  #     "cd simple-server/server/",
-  #     "npm i",
-  #     # it's a JS file, nothing to "build" here
-  #   ]
-  # }
   provisioner "shell" {
     script = "./setup.sh"
   }

@@ -20,9 +20,6 @@ NODE_PATH=$(which node)
 
 # create a service file
 sudo touch /etc/systemd/system/simple-server.service
-
-# TODO - DEBUG
-sudo cat /etc/systemd/system/simple-server.service
 echo "[Unit]" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
 echo "Description=Simple Server" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
 echo "After=multi-user.target" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
@@ -37,9 +34,6 @@ echo "Environment=NODE_ENV=production" | sudo tee -a /etc/systemd/system/simple-
 echo "" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
 echo "[Install]" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
 echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
-
-# TODO - DEBUG
-sudo cat /etc/systemd/system/simple-server.service
 
 # enable and start the service
 sudo systemctl enable simple-server
