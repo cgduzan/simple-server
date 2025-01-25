@@ -18,8 +18,8 @@ provider "aws" {
 data "aws_ami" "simple_server_ami" {
   most_recent = true
   # gets the most recent AMI we built using Packer
-  name_regex  = "simple-server-*"
-  owners      = ["self"]
+  name_regex = "simple-server-*"
+  owners     = ["self"]
 }
 
 resource "aws_instance" "simple_server_app" {
