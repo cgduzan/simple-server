@@ -12,6 +12,11 @@ variable "ami_prefix" {
   default = "simple-server"
 }
 
+variable "region" {
+  type    = string
+  default = "us-east-1"
+}
+
 locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
 }
@@ -19,7 +24,7 @@ locals {
 source "amazon-ebs" "server" {
   ami_name      = "${var.ami_prefix}-${local.timestamp}"
   instance_type = "t2.micro"
-  region        = "us-east-1"
+  region        = "${var.region}"
   source_ami_filter {
     # these values can be pulled from the AMI in the AWS console (search by the AMI ID)
     filters = {
