@@ -45,6 +45,11 @@ source "amazon-ebs" "server" {
 build {
   sources = ["source.amazon-ebs.server"]
 
+  provisioner "file" {
+    source      = "simple-server.service"
+    destination = "/tmp/simple-server.service"
+  }
+
   provisioner "shell" {
     script = "./setup.sh"
   }

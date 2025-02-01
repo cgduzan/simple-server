@@ -1,0 +1,14 @@
+[Unit]
+Description=Simple Server
+After=multi-user.target
+
+[Service]
+ExecStart={NODE_PATH} {INDEX_PATH}
+Restart=always
+RestartSec=10
+User=ec2-user
+SyslogIdentifier=simple-server
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

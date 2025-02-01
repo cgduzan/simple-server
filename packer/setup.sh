@@ -15,25 +15,12 @@ cd simple-server/server/
 npm i
 # it's a JS file, nothing to "build" here
 
-# get path to node
-NODE_PATH=$(which node)
+# copy the service file from /tmp to /etc/systemd/system
+sudo cp /tmp/simple-server.service /etc/systemd/system/simple-server.service
 
-# create a service file
-sudo touch /etc/systemd/system/simple-server.service
-echo "[Unit]" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
-echo "Description=Simple Server" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
-echo "After=multi-user.target" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
-echo "" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
-echo "[Service]" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
-echo "ExecStart=$NODE_PATH $(pwd)/index.js" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
-echo "Restart=always" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
-echo "RestartSec=10" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
-echo "User=ec2-user" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
-echo "SyslogIdentifier=simple-server" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
-echo "Environment=NODE_ENV=production" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
-echo "" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
-echo "[Install]" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
-echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/simple-server.service > /dev/null
+# replace the placeholders in the service file
+sudo sed -i "s|{NODE_PATH}|$(which node)|g" /etc/systemd/system/simple-server.service
+sudo sed -i "s|{INDEX_PATH}|$(pwd)/index.js|g" /etc/systemd/system/simple-server.service
 
 # enable and start the service
 sudo systemctl enable simple-server
